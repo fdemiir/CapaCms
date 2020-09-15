@@ -1,0 +1,90 @@
+﻿@model Products
+@{
+    ViewData["Title"] = "Edit Products";
+    var categoryList = ViewBag.CategoryList;
+    ;
+}
+<h1>Ürün Kaydetme Paneli</h1>
+
+@using (Html.BeginForm("SaveProducts", "Admin", FormMethod.Post))
+{
+    <table cellpadding="0" cellspacing="0">
+        <tr>
+            <td>Ürün Kodu: </td>
+            <td>
+                @Html.TextBoxFor(m => m.Id)
+            </td>
+        </tr>
+        <tr>
+            <td>İsim: </td>
+            <td>
+                @Html.TextBoxFor(m => m.Name)
+            </td>
+        </tr>
+        <tr>
+            <td>Açıklama: </td>
+            <td>
+                @Html.TextBoxFor(m => m.Description)
+            </td>
+        </tr>
+        <tr>
+            <td>Resim: </td>
+            <td>
+                @Html.TextBoxFor(m => m.Photo)
+            </td>
+        </tr>
+        <tr>
+            <td>Kategori: </td>
+            <td>
+                @Html.DropDownListFor(model => model.Category,
+                new SelectList(categoryList, "Name", "Name"), "Select")
+            </td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Submit" /></td>
+        </tr>
+    </table>
+}
+
+@*<form asp-controller="Admin" asp-action="SaveProducts" method="post">
+
+        <label>Ürün Kategori:</label>
+        <div class="form-group">
+            <select id="cars" name="cars">
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="fiat">Fiat</option>
+                <option value="audi">Audi</option>
+            </select>
+        </div>
+
+        <label>Ürün Adı:</label>
+        <input name="product-name" type="hidden" value="deneme" />
+        <div class="form-group">
+            <textarea name="product-name" class="form-control"> </textarea>
+        </div>
+
+        <label>Ürün Açıklama:</label>
+        <div class="form-group">
+            <textarea id="summernote" name="product-description" class="form-control" rows="3"></textarea>
+        </div>
+
+        <label>Ürün Resim:</label>
+        <div class="form-group">
+            <textarea id="summernote" name="product-image" class="form-control"></textarea>
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </form>*@
+
+@*@section Scripts {
+        <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#summernote').summernote();
+            });
+        </script>
+    }*@
