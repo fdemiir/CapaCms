@@ -39,7 +39,7 @@ namespace CmsCapaMedikal.Helper
                     cmd.Parameters.Add("@category", SqlDbType.NVarChar).Value = product.Category;
                     cmd.Parameters.Add("@name", SqlDbType.NVarChar).Value = product.Name;
                     cmd.Parameters.Add("@detail", SqlDbType.NVarChar).Value = product.Description;
-                    cmd.Parameters.Add("@photo", SqlDbType.NVarChar).Value = product.Photo;
+                    cmd.Parameters.Add("@photo", SqlDbType.VarBinary).Value = product.Photo;
 
 
                     int result = cmd.ExecuteNonQuery();
@@ -78,7 +78,7 @@ namespace CmsCapaMedikal.Helper
                             product.Name =reader["ProductName"].ToString();
                             product.Category = reader["ProductCategory"].ToString();
                             product.Description = reader["ProductDescription"].ToString();
-                            product.Photo = reader["ProductPhoto"].ToString();
+                            product.Photo = (byte[])reader["ProductPhoto"];
 
                             allProducts.Add(product);
                         }
@@ -95,5 +95,39 @@ namespace CmsCapaMedikal.Helper
                 }
             }
         }
+        public List<Categories> GetAllCategories()
+        {
+            using (var conn = new SqlConnection("Server=MONSTEROFFATIH;Database=CapaMedikalDB;User id=sa; Password=1234;"))
+            {
+                try
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("[dbo].[GetAllCategories]", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        var allCategories= new List<Categories>();
+                        while (reader.Read())
+                        {
+                            var category = new Categories();
+                            category.Id = Convert.ToInt32(reader["Id"]);
+                            category.CategoryName = reader["CategoryName"].ToString();
+
+                            allCategories.Add(category);
+                        }
+                        return allCategories;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
     }
 }

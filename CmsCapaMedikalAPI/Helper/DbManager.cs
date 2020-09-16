@@ -44,7 +44,7 @@ namespace CmsCapaMedikalAPI.Helper
                             product.Name = reader["ProductName"].ToString();
                             product.Category = reader["ProductCategory"].ToString();
                             product.Description = reader["ProductDescription"].ToString();
-                            product.Photo = reader["ProductPhoto"].ToString();
+                            product.Photo = (byte[])reader["ProductPhoto"];
 
                             allProducts.Add(product);
                         }
