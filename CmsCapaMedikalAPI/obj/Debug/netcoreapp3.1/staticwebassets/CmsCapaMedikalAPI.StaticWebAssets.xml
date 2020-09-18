@@ -1,1 +1,3 @@
-﻿<StaticWebAssets Version="1.0" />
+﻿<StaticWebAssets Version="1.0">
+  <ContentRoot BasePath="_content/CmsCapaMedikal" Path="C:\Users\ghost\Desktop\CmsCapaMedikal\CmsCapaMedikal\wwwroot\" />
+</StaticWebAssets>
