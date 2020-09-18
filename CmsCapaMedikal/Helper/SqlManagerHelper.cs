@@ -36,9 +36,14 @@ namespace CmsCapaMedikal.Helper
                     SqlCommand cmd = new SqlCommand("[dbo].[InsertProducts]", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add("@id", SqlDbType.Int).Value = product.Id;
-                    cmd.Parameters.Add("@category", SqlDbType.NVarChar).Value = product.Category;
+                    cmd.Parameters.Add("@code", SqlDbType.NVarChar).Value = product.Code;
                     cmd.Parameters.Add("@name", SqlDbType.NVarChar).Value = product.Name;
-                    cmd.Parameters.Add("@detail", SqlDbType.NVarChar).Value = product.Description;
+                    cmd.Parameters.Add("@area", SqlDbType.NVarChar).Value = product.Area;
+                    cmd.Parameters.Add("@class", SqlDbType.NVarChar).Value = product.Class;
+                    cmd.Parameters.Add("@type", SqlDbType.NVarChar).Value = product.Type;
+                    cmd.Parameters.Add("@bottombrand", SqlDbType.NVarChar).Value = product.BottomBrand;
+                    cmd.Parameters.Add("@image", SqlDbType.NVarChar).Value = product.Image;
+                    cmd.Parameters.Add("@categoryid", SqlDbType.Int).Value = product.CategoryId;
                     cmd.Parameters.Add("@photo", SqlDbType.VarBinary).Value = product.Photo;
 
 
@@ -59,7 +64,7 @@ namespace CmsCapaMedikal.Helper
             }
         }
 
-        public List<Products> GetProducts()
+        public List<Products> GetAllProducts()
         {
             using (var conn = new SqlConnection("Server=MONSTEROFFATIH;Database=CapaMedikalDB;User id=sa; Password=1234;"))
             {
@@ -75,9 +80,14 @@ namespace CmsCapaMedikal.Helper
                         {
                             var product = new Products();
                             product.Id =  Convert.ToInt32(reader["Id"]);
-                            product.Name =reader["ProductName"].ToString();
-                            product.Category = reader["ProductCategory"].ToString();
-                            product.Description = reader["ProductDescription"].ToString();
+                            product.Code = reader["ProductCode"].ToString();
+                            product.Name = reader["ProductName"].ToString();
+                            product.Area = reader["ProductArea"].ToString();
+                            product.Class = reader["ProductClass"].ToString();
+                            product.Type = reader["ProductType"].ToString();
+                            product.BottomBrand = reader["ProductBottomBrand"].ToString();
+                            product.Image = reader["ProductImage"].ToString();
+                            product.CategoryId = Convert.ToInt32(reader["ProductCategoryId"]);
                             product.Photo = (byte[])reader["ProductPhoto"];
 
                             allProducts.Add(product);
@@ -112,6 +122,9 @@ namespace CmsCapaMedikal.Helper
                             var category = new Categories();
                             category.Id = Convert.ToInt32(reader["Id"]);
                             category.CategoryName = reader["CategoryName"].ToString();
+                            category.CategoryPath = reader["CategoryPath"].ToString();
+                            category.CategoryUrl = reader["CategoryUrl"].ToString();
+                            category.CategoryInfo = reader["CategoryInfo"].ToString();
 
                             allCategories.Add(category);
                         }

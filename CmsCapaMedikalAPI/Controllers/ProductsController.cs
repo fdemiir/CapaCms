@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CmsCapaMedikalAPI.Helper;
-using CmsCapaMedikalAPI.Models;
-using Microsoft.AspNetCore.Http;
+using CmsCapaMedikal.Helper;
+using CmsCapaMedikal.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CmsCapaMedikalAPI.Controllers
@@ -13,7 +10,7 @@ namespace CmsCapaMedikalAPI.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        DbManager db = new DbManager();
+        SqlManagerHelper db = new SqlManagerHelper();
 
         public ActionResult<List<Products>> GetAllProducts()
         {

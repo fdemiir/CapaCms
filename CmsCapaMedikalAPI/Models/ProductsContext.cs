@@ -1,8 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using CmsCapaMedikal.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CmsCapaMedikalAPI.Models
 {

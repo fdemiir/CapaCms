@@ -9,5 +9,9 @@ namespace CmsCapaMedikal.Models
     {
         public int Id { get; set; }
         public string CategoryName { get; set; }
+        public string CategoryPath { get; set; }
+        public string CategoryUrl { get; set; }
+        public string CategoryInfo { get; set; }
+
     }
 }
