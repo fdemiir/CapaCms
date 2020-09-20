@@ -60,7 +60,6 @@ namespace CmsCapaMedikal.Controllers
                             product.Image = PathDB;
                             using (FileStream fs = System.IO.File.Create(fileName))
                             {
-                                product.Image = fs.Name;
                                 file.CopyTo(fs);
                                 fs.Flush();
                             }

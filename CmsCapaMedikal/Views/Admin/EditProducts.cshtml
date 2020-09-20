@@ -22,46 +22,46 @@
             </td>
         </tr>
         <tr>
-            <td>Ürün Name: </td>
+            <td>Ürün Adı: </td>
             <td>
                 @Html.TextBoxFor(m => m.Name)
             </td>
         </tr>
         <tr>
-            <td>Ürün Area: </td>
+            <td>Genel Kullanım Alanı: </td>
             <td>
                 @Html.TextBoxFor(m => m.Area)
             </td>
         </tr>
         <tr>
-            <td>Ürün Class: </td>
+            <td>Ürün Sınıfı: </td>
             <td>
                 @Html.TextBoxFor(m => m.Class)
             </td>
         </tr>
         <tr>
-            <td>Ürün Type: </td>
+            <td>Ürün Tipi: </td>
             <td>
                 @Html.TextBoxFor(m => m.Type)
             </td>
         </tr>
         <tr>
-            <td>Ürün BottomBrand: </td>
+            <td>Alt Marka: </td>
             <td>
                 @Html.TextBoxFor(m => m.BottomBrand)
             </td>
         </tr>
         <tr>
-            <td>Ürün Image: </td>
+            <td>Ürün Resmi: </td>
             <td>
                 <input type="file" name="file" />
             </td>
         </tr>
         <tr>
-            <td>Kategori: </td>
+            <td>Ürün Markası: </td>
             <td>
-                @Html.DropDownListFor(model => model.CategoryId,
-                new SelectList(categoryList, "Id", "CategoryName"), "Kategori seçiniz.")
+                @Html.DropDownListFor(model => model.CategoryName,
+                new SelectList(categoryList, "Name", "Name"), "Kategori seçiniz.")
             </td>
         </tr>
         @*<tr>
@@ -76,8 +76,7 @@
     </table>
 }
 
-
-
+<h1>Eklenen Ürünler</h1>
 <table>
     <tr>
         <th>Ürün Id:</th>
@@ -86,10 +85,12 @@
     </tr>
     @foreach (var item in productList)
     {
+        var img = $"/Images/{item.Code}.jpg";
+
         <tr>
             <td>@item.Id</td>
             <td>@item.Name</td>
-            <td><img src="~/Images/3M-1001.jpg" height="80" width="120" /></td>
+            <td><img src=@img height="80" width="120" /></td>
         </tr>
     }
 </table>

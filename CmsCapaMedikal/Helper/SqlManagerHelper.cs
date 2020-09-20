@@ -43,9 +43,7 @@ namespace CmsCapaMedikal.Helper
                     cmd.Parameters.Add("@type", SqlDbType.NVarChar).Value = product.Type;
                     cmd.Parameters.Add("@bottombrand", SqlDbType.NVarChar).Value = product.BottomBrand;
                     cmd.Parameters.Add("@image", SqlDbType.NVarChar).Value = product.Image;
-                    //cmd.Parameters.Add("@categoryid", SqlDbType.Int).Value = product.CategoryId;
-                    //cmd.Parameters.Add("@photo", SqlDbType.VarBinary).Value = product.Photo;
-
+                    cmd.Parameters.Add("@categoryname", SqlDbType.NVarChar).Value = product.CategoryName;
 
                     int result = cmd.ExecuteNonQuery();
                     if (result < 0)
@@ -87,8 +85,7 @@ namespace CmsCapaMedikal.Helper
                             product.Type = reader["ProductType"].ToString();
                             product.BottomBrand = reader["ProductBottomBrand"].ToString();
                             product.Image = reader["ProductImage"].ToString();
-                            product.CategoryId = Convert.ToInt32(reader["ProductCategoryId"]);
-                            //product.Photo = (byte[])reader["ProductPhoto"];
+                            product.CategoryName = reader["ProductCategoryName"].ToString();
 
                             allProducts.Add(product);
                         }
@@ -105,16 +102,16 @@ namespace CmsCapaMedikal.Helper
                 }
             }
         }
-        public List<Products> GetAllProductsHasTheSameId(int categorId)
+        public List<Products> GetAllProductsHasTheSameId(string categorName)
         {
             using (var conn = new SqlConnection("Server=MONSTEROFFATIH;Database=CapaMedikalDB;User id=sa; Password=1234;"))
             {
                 try
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("[dbo].[GetAllProductsHasTheSameId]", conn);
+                    SqlCommand cmd = new SqlCommand("[dbo].[GetAllProductsHasTheSameCategory]", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("@id", SqlDbType.Int).Value = categorId;
+                    cmd.Parameters.Add("@categoryName", SqlDbType.NVarChar).Value = categorName;
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         var allProducts = new List<Products>();
@@ -129,7 +126,7 @@ namespace CmsCapaMedikal.Helper
                             product.Type = reader["ProductType"].ToString();
                             product.BottomBrand = reader["ProductBottomBrand"].ToString();
                             product.Image = reader["ProductImage"].ToString();
-                            product.CategoryId = Convert.ToInt32(reader["ProductCategoryId"]);
+                            product.CategoryName = reader["ProductCategoryName"].ToString();
 
                             allProducts.Add(product);
                         }
@@ -167,7 +164,7 @@ namespace CmsCapaMedikal.Helper
                             category.Path = reader["CategoryPath"].ToString();
                             category.Url = reader["CategoryUrl"].ToString();
                             category.Info = reader["CategoryInfo"].ToString();
-                            category.Items = GetAllProductsHasTheSameId(category.Id);
+                            category.Items = GetAllProductsHasTheSameId(category.Name);
 
                             allCategories.Add(category);
                         }
