@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Edit Products";
     var categoryList = ViewBag.CategoryList;
-    ;
+    var productList = ViewBag.ProductList;
 }
 <h1>Ürün Kaydetme Paneli</h1>
 
@@ -45,16 +45,16 @@
                 @Html.TextBoxFor(m => m.Type)
             </td>
         </tr>
-        <tr >
+        <tr>
             <td>Ürün BottomBrand: </td>
-        <td>
-            @Html.TextBoxFor(m => m.BottomBrand)
-        </td>
+            <td>
+                @Html.TextBoxFor(m => m.BottomBrand)
+            </td>
         </tr>
         <tr>
-            <td>Ütün Image: </td>
+            <td>Ürün Image: </td>
             <td>
-                @Html.TextBoxFor(m => m.Image)
+                <input type="file" name="file" />
             </td>
         </tr>
         <tr>
@@ -64,14 +64,32 @@
                 new SelectList(categoryList, "Id", "CategoryName"), "Kategori seçiniz.")
             </td>
         </tr>
-        <tr>
-            <td>Resim: </td>
-            <td>
-                <input type="file" name="file" />
-            </td>
-        </tr>
+        @*<tr>
+                <td>Resim: </td>
+                <td>
+                    <input type="file" name="file" />
+                </td>
+            </tr>*@
         <tr>
             <td><input type="submit" value="Submit" /></td>
         </tr>
     </table>
 }
+
+
+
+<table>
+    <tr>
+        <th>Ürün Id:</th>
+        <th>Ürün Adı:</th>
+        <th>Ürün Fotoğraf:</th>
+    </tr>
+    @foreach (var item in productList)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td><img src="~/Images/3M-1001.jpg" height="80" width="120" /></td>
+        </tr>
+    }
+</table>

@@ -1,19 +1,24 @@
 ﻿using CmsCapaMedikal.Helper;
 using CmsCapaMedikal.Models;
-using Grpc.Core;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
+using System.Net.Http.Headers;
 
 namespace CmsCapaMedikal.Controllers
 {
     public class AdminController : Controller
     {
+        private readonly IHostingEnvironment _environment;
+
+        // Constructor
+        public AdminController(IHostingEnvironment IHostingEnvironment)
+        {
+            _environment = IHostingEnvironment;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -24,6 +29,9 @@ namespace CmsCapaMedikal.Controllers
             var model = new List<Categories>();
             model = db.GetAllCategories();
             ViewBag.CategoryList = model;
+            var prodmodel = new List<Products>();
+            prodmodel = db.GetAllProducts();
+            ViewBag.ProductList = prodmodel;
             return View();
         }
 
@@ -32,18 +40,45 @@ namespace CmsCapaMedikal.Controllers
         {
             try
             {
-                foreach (var file in Request.Form.Files)
+                var newFileName = string.Empty;
+                if (HttpContext.Request.Form.Files != null)
                 {
-                    MemoryStream ms = new MemoryStream();
-                    file.CopyTo(ms);
-                    product.Photo = ms.ToArray();
-
-                    ms.Close();
-                    ms.Dispose();
-
-                    //product.Photo = db.Images.Add(img);
-                    //db.SaveChanges();
+                    var fileName = string.Empty;
+                    string PathDB = string.Empty;
+                    var files = HttpContext.Request.Form.Files;
+                    foreach (var file in files)
+                    {
+                        if (file.Length > 0)
+                        {
+                            fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                            var myUniqueFileName = Convert.ToString(Guid.NewGuid());
+                            var FileExtension = Path.GetExtension(fileName);
+                            //newFileName = myUniqueFileName + FileExtension;
+                            newFileName = product.Code + FileExtension;
+                            fileName = Path.Combine(_environment.WebRootPath, "Images") + $@"\{newFileName}";
+                            PathDB = "Images/" + newFileName;
+                            product.Image = PathDB;
+                            using (FileStream fs = System.IO.File.Create(fileName))
+                            {
+                                product.Image = fs.Name;
+                                file.CopyTo(fs);
+                                fs.Flush();
+                            }
+                        }
+                    }
                 }
+                //foreach (var file in Request.Form.Files)
+                //{
+                //    MemoryStream ms = new MemoryStream();
+                //    file.CopyTo(ms);
+                //    product.Photo = ms.ToArray();
+
+                //    ms.Close();
+                //    ms.Dispose();
+
+                //    //product.Photo = db.Images.Add(img);
+                //    //db.SaveChanges();
+                //}
                 var db = new SqlManagerHelper();
                 db.InsertProducts(product);
                 return RedirectToAction("EditProducts");

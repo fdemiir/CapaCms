@@ -12,11 +12,11 @@ namespace CmsCapaMedikalAPI.Controllers
     {
         SqlManagerHelper db = new SqlManagerHelper();
 
-        public ActionResult<List<Products>> GetAllProducts()
+        public ActionResult<List<Categories>> GetAllProducts()
         {
             try
             {
-                return db.GetAllProducts();
+                return db.GetAllCategories();
             }
             catch (Exception ex)
             {

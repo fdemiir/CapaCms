@@ -43,8 +43,8 @@ namespace CmsCapaMedikal.Helper
                     cmd.Parameters.Add("@type", SqlDbType.NVarChar).Value = product.Type;
                     cmd.Parameters.Add("@bottombrand", SqlDbType.NVarChar).Value = product.BottomBrand;
                     cmd.Parameters.Add("@image", SqlDbType.NVarChar).Value = product.Image;
-                    cmd.Parameters.Add("@categoryid", SqlDbType.Int).Value = product.CategoryId;
-                    cmd.Parameters.Add("@photo", SqlDbType.VarBinary).Value = product.Photo;
+                    //cmd.Parameters.Add("@categoryid", SqlDbType.Int).Value = product.CategoryId;
+                    //cmd.Parameters.Add("@photo", SqlDbType.VarBinary).Value = product.Photo;
 
 
                     int result = cmd.ExecuteNonQuery();
@@ -88,7 +88,7 @@ namespace CmsCapaMedikal.Helper
                             product.BottomBrand = reader["ProductBottomBrand"].ToString();
                             product.Image = reader["ProductImage"].ToString();
                             product.CategoryId = Convert.ToInt32(reader["ProductCategoryId"]);
-                            product.Photo = (byte[])reader["ProductPhoto"];
+                            //product.Photo = (byte[])reader["ProductPhoto"];
 
                             allProducts.Add(product);
                         }
@@ -105,6 +105,48 @@ namespace CmsCapaMedikal.Helper
                 }
             }
         }
+        public List<Products> GetAllProductsHasTheSameId(int categorId)
+        {
+            using (var conn = new SqlConnection("Server=MONSTEROFFATIH;Database=CapaMedikalDB;User id=sa; Password=1234;"))
+            {
+                try
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("[dbo].[GetAllProductsHasTheSameId]", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@id", SqlDbType.Int).Value = categorId;
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        var allProducts = new List<Products>();
+                        while (reader.Read())
+                        {
+                            var product = new Products();
+                            product.Id = Convert.ToInt32(reader["Id"]);
+                            product.Code = reader["ProductCode"].ToString();
+                            product.Name = reader["ProductName"].ToString();
+                            product.Area = reader["ProductArea"].ToString();
+                            product.Class = reader["ProductClass"].ToString();
+                            product.Type = reader["ProductType"].ToString();
+                            product.BottomBrand = reader["ProductBottomBrand"].ToString();
+                            product.Image = reader["ProductImage"].ToString();
+                            product.CategoryId = Convert.ToInt32(reader["ProductCategoryId"]);
+
+                            allProducts.Add(product);
+                        }
+                        return allProducts;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
         public List<Categories> GetAllCategories()
         {
             using (var conn = new SqlConnection("Server=MONSTEROFFATIH;Database=CapaMedikalDB;User id=sa; Password=1234;"))
@@ -121,10 +163,11 @@ namespace CmsCapaMedikal.Helper
                         {
                             var category = new Categories();
                             category.Id = Convert.ToInt32(reader["Id"]);
-                            category.CategoryName = reader["CategoryName"].ToString();
-                            category.CategoryPath = reader["CategoryPath"].ToString();
-                            category.CategoryUrl = reader["CategoryUrl"].ToString();
-                            category.CategoryInfo = reader["CategoryInfo"].ToString();
+                            category.Name = reader["CategoryName"].ToString();
+                            category.Path = reader["CategoryPath"].ToString();
+                            category.Url = reader["CategoryUrl"].ToString();
+                            category.Info = reader["CategoryInfo"].ToString();
+                            category.Items = GetAllProductsHasTheSameId(category.Id);
 
                             allCategories.Add(category);
                         }
