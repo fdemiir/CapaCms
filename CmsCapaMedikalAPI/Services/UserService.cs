@@ -28,39 +28,36 @@ namespace CmsCapaMedikalAPI.Services
                         new User { Id = 2, FirstName = "Mehmet", LastName = "Çelik", UserName = "mehmetcelik", Password = "1234" }
         };
 
-        private readonly AppSettings _appSettings;
+        private readonly TokenOptions _tokenOptions;
 
-        public UserService(IOptions<AppSettings> appSettings)
+        public UserService(IOptions<TokenOptions> tokenOptions)
         {
-            _appSettings = appSettings.Value;
+            _tokenOptions = tokenOptions.Value;
         }
 
         public User Authenticate(string userName, string password)
         {
             var user = _users.SingleOrDefault(x => x.UserName == userName && x.Password == password);
 
-            // Kullanici bulunamadıysa null döner.
             if (user == null)
                 return null;
 
             // Authentication(Yetkilendirme) başarılı ise JWT token üretilir.
             var tokenHandler = new JwtSecurityTokenHandler();
-            //var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            var key = Encoding.ASCII.GetBytes(_tokenOptions.SecurityKey);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
                     new Claim(ClaimTypes.Name, user.Id.ToString())
                 }),
-                Expires = DateTime.UtcNow.AddDays(7)
-                //SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                Expires = DateTime.UtcNow.AddDays(7),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
             user.Token = tokenHandler.WriteToken(token);
 
-            // Sifre null olarak gonderilir.
             user.Password = null;
-
             return user;
         }
 

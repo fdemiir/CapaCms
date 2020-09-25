@@ -36,14 +36,10 @@ namespace CmsCapaMedikalAPI
             services.AddControllers();
             services.AddCors();
 
-            // appsettings içerisindeki Secret deðerlerini AppSettings sýnýfýna atýyorum.
-            var appSettingSection = Configuration.GetSection("AppSettings");
-            services.Configure<AppSettings>(appSettingSection);
-
-            // jwt ayarlarýný yapýyorum
-
-            var appSettings = appSettingSection.Get<AppSettings>();
-            //var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+            var appSettingSection = Configuration.GetSection("TokenOptions");
+            services.Configure<TokenOptions>(appSettingSection);
+            var appSettings = appSettingSection.Get<TokenOptions>();
+            var key = Encoding.ASCII.GetBytes(appSettings.SecurityKey);
 
             //[Authorize] belirtilmeyen þemalarda da varsayýlan olarak AuthenticationScheme kullanýlýr.
             services.AddAuthentication(x => {
@@ -56,13 +52,12 @@ namespace CmsCapaMedikalAPI
                 x.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    //IssuerSigningKey = new SymmetricSecurityKey(key), //Secret ile oluþturduðumuz anahtarý güvenlik anaktarý olarak atýyorum.
+                    IssuerSigningKey = new SymmetricSecurityKey(key), //Secret ile oluþturduðumuz anahtarý güvenlik anaktarý olarak atýyorum.
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };
             });
 
-            // Dependency Injection yapýlandýrmasý
             services.AddScoped<IUserService, UserService>();
         }
 
