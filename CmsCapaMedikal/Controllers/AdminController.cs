@@ -34,7 +34,14 @@ namespace CmsCapaMedikal.Controllers
             ViewBag.ProductList = prodmodel;
             return View();
         }
-
+        public IActionResult ListProducts()
+        {
+            var db = new SqlManagerHelper();
+            var prodmodel = new List<Products>();
+            prodmodel = db.GetAllProducts();
+            ViewBag.ProductList = prodmodel;
+            return View();
+        }
         [HttpPost]
         public ActionResult SaveProducts(Products product)
         {
@@ -66,18 +73,6 @@ namespace CmsCapaMedikal.Controllers
                         }
                     }
                 }
-                //foreach (var file in Request.Form.Files)
-                //{
-                //    MemoryStream ms = new MemoryStream();
-                //    file.CopyTo(ms);
-                //    product.Photo = ms.ToArray();
-
-                //    ms.Close();
-                //    ms.Dispose();
-
-                //    //product.Photo = db.Images.Add(img);
-                //    //db.SaveChanges();
-                //}
                 var db = new SqlManagerHelper();
                 db.InsertProducts(product);
                 return RedirectToAction("EditProducts");
