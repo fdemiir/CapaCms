@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using CmsCapaMedikal.Helper;
+using System.Linq;
+using System.Threading.Tasks;
 using CmsCapaMedikal.Models;
+using CmsCapaMedikalAPI.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CmsCapaMedikalAPI.Controllers
 {
@@ -12,21 +15,22 @@ namespace CmsCapaMedikalAPI.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        SqlManagerHelper db = new SqlManagerHelper();
+        private readonly ProductsContext _context;
 
-        public ActionResult<List<Categories>> GetAllProducts()
+        // Constructor
+        public ProductsController(ProductsContext context)
         {
-            try
-            {
-                return db.GetAllCategories();
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
+            _context = context;
         }
 
+        [Route("GetAllProducts")]
+        public async Task<ActionResult> GetAllProducts()
+        {
+            var categories = await _context.Categories.ToListAsync();
+            var products = await _context.Products.Where(x => categories.Select(a => a.CategoryName).Contains(x.ProductCategoryName)).ToListAsync();
+            categories.ForEach(x => x.Items = products.FindAll(a => a.ProductCategoryName == x.CategoryName));
 
-    }
+            return Ok(categories);
+        }
+     }
 }

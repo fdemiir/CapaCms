@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Products>
+
+<div class="jumbotron mt-5">
+    <h1 class="text-danger">Ürünler</h1>
+    <a class="btn btn-outline-success mt-3" asp-controller="Products" asp-action="Create" >Yeni Ürün</a>
+    <table class="table mt-3">
+        <thead class="thead-dark">
+            <tr>
+                <th>Id</th>
+                <th>Ürün</th>
+                <th>Kullanım Alanı</th>
+                <th>Kategori</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+    {
+            <tr>
+                <td>@item.Id</td>
+                <td><img src="/Images/@item.ProductImage" style="max-height:50px" />@item.ProductName</td>
+                <td>@item.ProductArea</td>
+                <td>@item.ProductCategoryName</td>
+                <td>
+                    <a class="btn btn-outline-secondary" asp-controller="Products" asp-action="Details" asp-route-id="@item.Id">Detay</a>
+                    <a class="btn btn-outline-primary" asp-controller="Products" asp-action="Edit" asp-route-id="@item.Id">Düzenle</a>
+                    <a class="btn btn-outline-danger" asp-controller="Products" asp-action="Delete" asp-route-id="@item.Id">Sil</a>
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
+</div>
