@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace CmsCapaMedikal
 {
@@ -20,7 +21,8 @@ namespace CmsCapaMedikal
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ProductsContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("CapaMedikalDB")));
+            var env= Environment.GetEnvironmentVariable("CapaMedikalDB");
+            services.AddDbContext<ProductsContext>(opt => opt.UseSqlServer(env));
             services.AddControllersWithViews();
         }
 

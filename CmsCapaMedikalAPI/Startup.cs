@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using CmsCapaMedikalAPI.Helper;
 using CmsCapaMedikalAPI.Models;
@@ -24,7 +25,8 @@ namespace CmsCapaMedikalAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ProductsContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("CapaMedikalDB")));
+            var env = Environment.GetEnvironmentVariable("CapaMedikalDB");
+            services.AddDbContext<ProductsContext>(opt => opt.UseSqlServer(env));
             services.AddControllers();
             services.AddCors();
 

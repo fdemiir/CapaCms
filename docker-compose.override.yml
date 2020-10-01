@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+  cmscapamedikal:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - CapaMedikalDB=Server=azurecapamedikal.database.windows.net;Database=AzureCapaMedikal;User id=admincapa; Password=capa1987*;
+    ports:
+      - "32780:80"
+      - "443"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+  cmscapamedikalapi:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - CapaMedikalDB=Server=azurecapamedikal.database.windows.net;Database=AzureCapaMedikal;User id=admincapa; Password=capa1987*;
+    ports:
+      - "32781:80"
+      - "443"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro

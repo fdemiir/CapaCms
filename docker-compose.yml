@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  cmscapamedikal:
+    image: ${DOCKER_REGISTRY-}cmscapamedikal
+    build:
+      context: .
+      dockerfile: CmsCapaMedikal/Dockerfile
+
+  cmscapamedikalapi:
+    image: ${DOCKER_REGISTRY-}cmscapamedikalapi
+    build:
+      context: .
+      dockerfile: CmsCapaMedikalAPI/Dockerfile
+

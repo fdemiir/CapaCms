@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.30225.117
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CmsCapaMedikal", "CmsCapaMedikal\CmsCapaMedikal.csproj", "{86B5D677-283B-4000-A19D-2813160854B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CmsCapaMedikalAPI", "CmsCapaMedikalAPI\CmsCapaMedikalAPI.csproj", "{6E98C7AA-C200-4B82-A845-BAFB315DFCB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CmsCapaMedikalAPI", "CmsCapaMedikalAPI\CmsCapaMedikalAPI.csproj", "{6E98C7AA-C200-4B82-A845-BAFB315DFCB9}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{0CAB4A1B-DD55-4B09-9EA5-D7CF0348336E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{6E98C7AA-C200-4B82-A845-BAFB315DFCB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E98C7AA-C200-4B82-A845-BAFB315DFCB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E98C7AA-C200-4B82-A845-BAFB315DFCB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CAB4A1B-DD55-4B09-9EA5-D7CF0348336E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CAB4A1B-DD55-4B09-9EA5-D7CF0348336E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CAB4A1B-DD55-4B09-9EA5-D7CF0348336E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CAB4A1B-DD55-4B09-9EA5-D7CF0348336E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
