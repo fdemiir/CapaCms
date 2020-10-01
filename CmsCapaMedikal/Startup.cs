@@ -21,8 +21,7 @@ namespace CmsCapaMedikal
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var env= Environment.GetEnvironmentVariable("CapaMedikalDB");
-            services.AddDbContext<ProductsContext>(opt => opt.UseSqlServer(env));
+            services.AddDbContext<ProductsContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("CapaMedikalDB")));
             services.AddControllersWithViews();
         }
 

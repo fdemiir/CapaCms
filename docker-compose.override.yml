@@ -5,7 +5,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
-      - CapaMedikalDB=Server=azurecapamedikal.database.windows.net;Database=AzureCapaMedikal;User id=admincapa; Password=capa1987*;
+      - CapaMedikalDB=Server=94.73.150.5;Database=capamed;User id=usercap; Password=VVni99P7CQru69Q;
     ports:
       - "32780:80"
       - "443"
@@ -16,7 +16,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
-      - CapaMedikalDB=Server=azurecapamedikal.database.windows.net;Database=AzureCapaMedikal;User id=admincapa; Password=capa1987*;
+      - CapaMedikalDB=Server=94.73.150.5;Database=capamed;User id=usercap; Password=VVni99P7CQru69Q;
     ports:
       - "32781:80"
       - "443"
