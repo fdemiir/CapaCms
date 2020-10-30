@@ -25,7 +25,7 @@ namespace CmsCapaMedikalAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ProductsContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("CapaMedikalDB")));
+            services.AddDbContext<CapamedikalApiContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("CapaMedikalDB")));
             services.AddControllers();
             services.AddCors();
 

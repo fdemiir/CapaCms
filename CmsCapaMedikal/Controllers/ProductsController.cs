@@ -13,11 +13,11 @@ namespace CmsCapaMedikal.Controllers
 {
     public class ProductsController : Controller
     {
-        private readonly ProductsContext _context;
+        private readonly CapaMedikalContext _context;
         private readonly IHostingEnvironment _environment;
 
         // Constructor
-        public ProductsController(ProductsContext context, IHostingEnvironment IHostingEnvironment)
+        public ProductsController(CapaMedikalContext context, IHostingEnvironment IHostingEnvironment)
         {
             _context = context;
             _environment = IHostingEnvironment;
@@ -31,12 +31,6 @@ namespace CmsCapaMedikal.Controllers
         {
 
             return View(_context.Products);
-
-            //var db = new SqlManagerHelper();
-            //var prodmodel = new List<Products>();
-            //prodmodel = db.GetAllProducts();
-            //ViewBag.ProductList = prodmodel;
-            //return View();
         }
         public IActionResult Details(int id)
         {
@@ -79,6 +73,8 @@ namespace CmsCapaMedikal.Controllers
             {
                 await prod.ProductsFile.CopyToAsync(fileFlood);
             }
+            var prodId = _context.Products.Max(p=>p.Id);
+            prod.Id = prodId + 1;
             prod.ProductImage = prod.ProductsFile.FileName;
             _context.Products.Add(prod);
             await _context.SaveChangesAsync();

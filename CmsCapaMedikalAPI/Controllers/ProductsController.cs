@@ -15,10 +15,10 @@ namespace CmsCapaMedikalAPI.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly ProductsContext _context;
+        private readonly CapamedikalApiContext _context;
 
         // Constructor
-        public ProductsController(ProductsContext context)
+        public ProductsController(CapamedikalApiContext context)
         {
             _context = context;
         }

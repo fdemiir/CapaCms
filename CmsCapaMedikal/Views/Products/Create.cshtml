@@ -8,11 +8,6 @@
     <div class="col-4">
         <form asp-controller="Products" asp-action="Create"  enctype = "multipart/form-data">
             <div class="form-group">
-                <label for="productsId">Ürün Id:</label>
-                <input asp-for="Id" type="number" class="form-control" id="productsId" aria-describedby="productsIdDesc">
-                <small id="productsHelp" class="form-text text-muted">Benzersiz bir Id girin.</small>
-            </div>
-            <div class="form-group">
                 <label for="productsCode">Ürün Kodu:</label>
                 <input asp-for="ProductCode" type="text" class="form-control" id="productsCode" required>
             </div>

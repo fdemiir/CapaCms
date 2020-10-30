@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CmsCapaMedikal.Migrations
 {
-    [DbContext(typeof(ProductsContext))]
+    [DbContext(typeof(CapaMedikalContext))]
     partial class ProductsContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -17,6 +17,28 @@ namespace CmsCapaMedikal.Migrations
                 .HasAnnotation("ProductVersion", "3.1.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("CmsCapaMedikal.Models.Careers", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CandidateDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CandidateDocument")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CandidateFirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CandidateLastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Careers");
+                });
 
             modelBuilder.Entity("CmsCapaMedikal.Models.Categories", b =>
                 {
@@ -40,6 +62,25 @@ namespace CmsCapaMedikal.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("CmsCapaMedikal.Models.Contents", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ContentDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContentImage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContentTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Contents");
                 });
 
             modelBuilder.Entity("CmsCapaMedikal.Models.Products", b =>

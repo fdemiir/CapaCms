@@ -3,13 +3,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CmsCapaMedikalAPI.Models
 {
-    public class ProductsContext : DbContext
+    public class CapamedikalApiContext : DbContext
     {
-        public ProductsContext(DbContextOptions<ProductsContext> options) : base(options) { }
+        public CapamedikalApiContext(DbContextOptions<CapamedikalApiContext> options) : base(options) { }
         public DbSet<Products> Products { get; set; }
         public DbSet<Categories> Categories { get; set; }
         public DbSet<Users> Users { get; set; }
-
-
+        public DbSet<Careers> Careers { get; set; }
+        public DbSet<Contents> Contents { get; set; }
     }
 }

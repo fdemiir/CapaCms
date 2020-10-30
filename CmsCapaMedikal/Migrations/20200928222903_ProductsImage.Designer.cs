@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CmsCapaMedikal.Migrations
 {
-    [DbContext(typeof(ProductsContext))]
+    [DbContext(typeof(CapaMedikalContext))]
     [Migration("20200928222903_ProductsImage")]
     partial class ProductsImage
     {

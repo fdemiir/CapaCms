@@ -1,0 +1,12 @@
+﻿@model Contents
+
+<h1>Silmek istediğinizden emin misiniz?</h1>
+
+<div class="row">
+    <div class="col-4">
+        <form asp-controller="Contents" asp-action="Delete">
+            <button type="submit" class="btn btn-primary">Sil</button>
+            <a class="btn btn-secondary" asp-controller="Contents" asp-action="List">Geri</a>
+        </form>
+    </div>
+</div>

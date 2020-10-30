@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Careers>
+
+<div class="jumbotron mt-5">
+    <h1 class="text-info">Kariyerler</h1>
+    <table class="table mt-3">
+        <thead class="thead-dark">
+            <tr>
+                <th>Ad</th>
+                <th>Soyad</th>
+                <th>Açıklama</th>
+                <th>CV</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.CandidateFirstName</td>
+                    <td>@item.CandidateLastName</td>
+                    <td>@item.CandidateDescription</td>
+                    <td>@item.CandidateDocument</td>
+                    <td>
+                        <a class="btn btn-outline-danger" asp-controller="Careers" asp-action="Delete" asp-route-id="@item.Id">Sil</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,26 @@
+﻿@model Contents
+<h1>İçerik Düzenleme Paneli</h1>
+
+<div class="row">
+    <div class="col-4">
+        <form asp-controller="Contents" asp-action="Edit">
+            <div class="form-group">
+                <label for="contentsTitle">İçerik Başlık:</label>
+                <input asp-for="ContentTitle" type="text" class="form-control" id="contentsTitle">
+            </div>
+            <div class="form-group">
+                <label for="contentsDescription">İçerik Açıklama:</label>
+                <input asp-for="ContentDescription" type="text" class="form-control" id="contentsDescription">
+            </div>
+            <div class="custom-file mb-3">
+                <input asp-for="ContentFile" type="file" class="custom-file-input" id="contentsFile" required>
+                <label class="custom-file-label" type="file" for="contentsFile">Resim seçiniz...</label>
+                <div class="invalid-feedback">Lütfen bir resim seçiniz!</div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Kaydet</button>
+                <a class="btn btn-secondary" asp-controller="Contents" asp-action="List">Geri</a>
+            </div>
+        </form>
+    </div>
+</div>

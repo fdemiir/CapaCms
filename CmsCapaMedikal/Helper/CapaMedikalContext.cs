@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace CmsCapaMedikal.Helper
 {
-    public class ProductsContext : DbContext
+    public class CapaMedikalContext : DbContext
     {
-        public ProductsContext(DbContextOptions<ProductsContext> options) : base(options) { }
+        public CapaMedikalContext(DbContextOptions<CapaMedikalContext> options) : base(options) { }
         public DbSet<Products> Products { get; set; }
         public DbSet<Categories> Categories { get; set; }
-
+        public DbSet<Careers> Careers { get; set; }
+        public DbSet<Contents> Contents { get; set; }
     }
 }

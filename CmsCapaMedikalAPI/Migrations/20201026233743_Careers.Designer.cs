@@ -3,14 +3,16 @@ using CmsCapaMedikalAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CmsCapaMedikalAPI.Migrations
 {
     [DbContext(typeof(CapamedikalApiContext))]
-    partial class ProductsContextModelSnapshot : ModelSnapshot
+    [Migration("20201026233743_Careers")]
+    partial class Careers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,25 +64,6 @@ namespace CmsCapaMedikalAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("CmsCapaMedikalAPI.Models.Contents", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ContentDescription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ContentImage")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ContentTitle")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Contents");
                 });
 
             modelBuilder.Entity("CmsCapaMedikalAPI.Models.Products", b =>

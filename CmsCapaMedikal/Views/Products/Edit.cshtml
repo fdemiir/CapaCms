@@ -8,33 +8,28 @@
     <div class="col-4">
         <form asp-controller="Products" asp-action="Edit">
             <div class="form-group">
-                <label for="productsId">Ürün Id:</label>
-                <input asp-for="Id" type="number" class="form-control" id="productsId" aria-describedby="productsIdDesc" readonly>
-                <small id="productsHelp" class="form-text text-muted">Düzenlemek için yetkilendirilmelisiniz.</small>
-            </div>
-            <div class="form-group">
                 <label for="productsCode">Ürün Kodu:</label>
-                <input asp-for="ProductCode" type="text" class="form-control" id="productsCode">
+                <input asp-for="ProductCode" type="text" class="form-control" id="productsCode" required>
             </div>
             <div class="form-group">
                 <label for="productsName">Ürün Adı:</label>
-                <input asp-for="ProductName" type="text" class="form-control" id="productsName">
+                <input asp-for="ProductName" type="text" class="form-control" id="productsName" required>
             </div>
             <div class="form-group">
                 <label for="productsArea">Genel Kullanım Alanı:</label>
-                <input asp-for="ProductArea" type="text" class="form-control" id="productsArea">
+                <input asp-for="ProductArea" type="text" class="form-control" id="productsArea" required>
             </div>
             <div class="form-group">
                 <label for="productsClass">Ürün Sınıfı:</label>
-                <input asp-for="ProductClass" type="text" class="form-control" id="productsClass">
+                <input asp-for="ProductClass" type="text" class="form-control" id="productsClass" required>
             </div>
             <div class="form-group">
                 <label for="productsType">Ürün Tipi:</label>
-                <input asp-for="ProductType" type="text" class="form-control" id="productsType">
+                <input asp-for="ProductType" type="text" class="form-control" id="productsType" required>
             </div>
             <div class="form-group">
                 <label for="productsBottomBrand">Ürün Alt Marka:</label>
-                <input asp-for="ProductBottomBrand" type="text" class="form-control" id="productsBottomBrand">
+                <input asp-for="ProductBottomBrand" type="text" class="form-control" id="productsBottomBrand" required>
             </div>
             <div class="custom-file mb-3">
                 <input asp-for="ProductsFile" type="file" class="custom-file-input" id="productsImage" required>

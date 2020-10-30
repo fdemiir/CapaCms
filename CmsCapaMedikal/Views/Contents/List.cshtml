@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Contents>
+
+<div class="jumbotron mt-5">
+    <h1 class="text-danger">İçerikler</h1>
+    <a class="btn btn-outline-success mt-3" asp-controller="Contents" asp-action="Create">Yeni İçerik</a>
+    <table class="table mt-3">
+        <thead class="thead-dark">
+            <tr>
+                <th>Resim</th>
+                <th>İçerik Başlık</th>
+                <th>İçerik Açıklama</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td><img src="/Images/@item.ContentImage" style="max-height:50px" /></td>
+                <td>@item.ContentTitle</td>
+                <td>@item.ContentDescription</td>
+                <td>
+                    <a class="btn btn-outline-secondary" asp-controller="Contents" asp-action="Details" asp-route-id="@item.Id">Detay</a>
+                    <a class="btn btn-outline-primary" asp-controller="Contents" asp-action="Edit" asp-route-id="@item.Id">Düzenle</a>
+                    <a class="btn btn-outline-danger" asp-controller="Contents" asp-action="Delete" asp-route-id="@item.Id">Sil</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
